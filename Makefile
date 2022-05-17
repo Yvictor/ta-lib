@@ -51,8 +51,8 @@ install-test:
 	rm -rf talib
 	for PYBIN in $(wildcard /opt/python/*/bin);	\
 	do	\
-		$$PYBIN/pip install talib-binary --no-index -f wheelhouse;	\
+		$$PYBIN/pip install talib-bin --no-index -f wheelhouse;	\
 	done
 
 upload-pypi-server:
-	/opt/python/cp37-cp37m/bin/twine upload wheelhouse/talib_binary*manylinux*.whl
+	twine upload wheelhouse/talib_bin*.whl
