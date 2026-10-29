@@ -104,7 +104,8 @@ TA_RetCode ema(int startIdx, int endIdx,
 
    while( today <= endIdx )
    {
-      prevMA = optInK_1 * inReal[today++] + emaBeta * prevMA;
+      prevMA = optInK_1 * inReal[today] + emaBeta * prevMA;
+      today++;
       outReal[outIdx++] = prevMA;
    }
 

@@ -154,7 +154,8 @@
       outReal[0] = prevMA;
       outIdx = 1;
       while( today <= endIdx ) {
-         prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today++]);
+         prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today]);
+         today += 1;
          outReal[outIdx++] = prevMA;
       }
       outNBElement.value = outIdx;
@@ -225,7 +226,8 @@
       outReal[0] = prevMA;
       outIdx = 1;
       while( today <= endIdx ) {
-         prevMA = Math.fma(emaBeta, prevMA, optInK_1 * (double)inReal[today++]);
+         prevMA = Math.fma(emaBeta, prevMA, optInK_1 * (double)inReal[today]);
+         today += 1;
          outReal[outIdx++] = prevMA;
       }
       outNBElement.value = outIdx;
@@ -623,7 +625,8 @@
       outReal[0 * outStride] = prevMA;
       outIdx = 1;
       while( today <= endIdx ) {
-         prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today++]);
+         prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today]);
+         today += 1;
          outReal[outIdx++ * outStride] = prevMA;
       }
       outNBElement.value = outIdx;

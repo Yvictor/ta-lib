@@ -2720,6 +2720,19 @@ fn rust_block_scans_run_as_counted_windows() {
     }
 }
 
+#[test]
+fn rust_ema_output_loop_runs_as_counted_windows() {
+    let (func, enums) = load_indicator("ema");
+    let rust = backends::rust_lang::generate(&func, &enums, make_registry(), make_helpers());
+    let batch = rust.split("/**** Streaming API *****/").next().unwrap();
+    let loops = windowed_loop_bodies(batch);
+    let output_loop = loops.iter().find(|body| body.contains("prevMA = ") && body.contains("outIdx += 1;"))
+        .expect("EMA's output loop must use counted slices");
+    assert!(!output_loop.contains("inReal["), "{output_loop}");
+    assert!(!output_loop.contains("outReal["), "{output_loop}");
+    assert!(output_loop.contains(".mul_add("), "{output_loop}");
+}
+
 /// A candlestick's main loop that reads through a trailing index runs over
 /// windows (#442): the reads of its pattern test sit in `&&` chains and helper
 /// arms, so the windows are cut with `get`, while what the pattern's arms read

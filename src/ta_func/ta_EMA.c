@@ -183,7 +183,8 @@ TA_LIB_API TA_RetCode TA_EMA( int    startIdx,
    outIdx = 1;
    while( today <= endIdx )
    {
-      prevMA = fma(emaBeta, prevMA, optInK_1 * inReal[today++]);
+      prevMA = fma(emaBeta, prevMA, optInK_1 * inReal[today]);
+      today += 1;
       outReal[outIdx++] = prevMA;
    }
    *outNBElement= outIdx;
@@ -270,7 +271,8 @@ TA_RetCode TA_S_EMA( int    startIdx,
    outIdx = 1;
    while( today <= endIdx )
    {
-      prevMA = fma(emaBeta, prevMA, optInK_1 * (double)inReal[today++]);
+      prevMA = fma(emaBeta, prevMA, optInK_1 * (double)inReal[today]);
+      today += 1;
       outReal[outIdx++] = prevMA;
    }
    *outNBElement= outIdx;
@@ -429,7 +431,8 @@ static TA_FMA_STEP_INLINE TA_RetCode TA_EMA_OpenImpl( struct TA_EMA_Stream **str
       outIdx = 1;
       while( today <= endIdx )
       {
-         prevMA = fma(emaBeta, prevMA, optInK_1 * inReal[today++]);
+         prevMA = fma(emaBeta, prevMA, optInK_1 * inReal[today]);
+         today += 1;
          outReal[outIdx++ * outStride] = prevMA;
       }
       *outNBElement= outIdx;

@@ -241,10 +241,16 @@ impl Core {
         }
         outReal[0] = prevMA;
         outIdx = 1;
-        while today <= endIdx {
-            prevMA = (emaBeta as f64).mul_add(prevMA, ((optInK_1) as f64) * inReal[{ let _v = today; today += 1; _v }]);
-            outReal[outIdx] = prevMA;
-            outIdx += 1;
+        if today <= endIdx {
+            let _wn: usize = endIdx - today + 1;
+            let _w0 = &inReal[today..][.._wn];
+            let _w1 = &mut outReal[outIdx..][.._wn];
+            for _wk in 0.._wn {
+                prevMA = (emaBeta as f64).mul_add(prevMA, ((optInK_1) as f64) * _w0[_wk]);
+                today += 1;
+                _w1[_wk] = prevMA;
+                outIdx += 1;
+            }
         }
         (*outNBElement) = outIdx;
         return RetCode::Success;
@@ -516,7 +522,8 @@ impl Core {
         outReal[(0 * outStride) as usize] = prevMA;
         outIdx = 1;
         while today <= endIdx {
-            prevMA = (emaBeta as f64).mul_add(prevMA, ((optInK_1) as f64) * inReal[{ let _v = today; today += 1; _v }]);
+            prevMA = (emaBeta as f64).mul_add(prevMA, ((optInK_1) as f64) * inReal[today]);
+            today += 1;
             outReal[({ let _v = outIdx; outIdx += 1; _v } * outStride) as usize] = prevMA;
         }
         (*outNBElement) = outIdx;

@@ -97218,7 +97218,8 @@ class Core {
           outReal[0] = prevMA;
           outIdx = 1;
           while( today <= endIdx ) {
-             prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today++]);
+             prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today]);
+             today += 1;
              outReal[outIdx++] = prevMA;
           }
           outNBElement.value = outIdx;
@@ -97289,7 +97290,8 @@ class Core {
           outReal[0] = prevMA;
           outIdx = 1;
           while( today <= endIdx ) {
-             prevMA = Math.fma(emaBeta, prevMA, optInK_1 * (double)inReal[today++]);
+             prevMA = Math.fma(emaBeta, prevMA, optInK_1 * (double)inReal[today]);
+             today += 1;
              outReal[outIdx++] = prevMA;
           }
           outNBElement.value = outIdx;
@@ -97687,7 +97689,8 @@ class Core {
           outReal[0 * outStride] = prevMA;
           outIdx = 1;
           while( today <= endIdx ) {
-             prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today++]);
+             prevMA = Math.fma(emaBeta, prevMA, optInK_1 * inReal[today]);
+             today += 1;
              outReal[outIdx++ * outStride] = prevMA;
           }
           outNBElement.value = outIdx;
@@ -230421,7 +230424,7 @@ class Core {
 
 public class TaCodegenServe {
     static Core core = new Core();
-    static final String SPLICED_GENCODE_DIGEST = "2ee7a4d148242d1f";
+    static final String SPLICED_GENCODE_DIGEST = "2f0916bd84cf5d1e";
     static final int MAX_ARRAY_SIZE = 200000;
     static double[] refOpen = new double[MAX_ARRAY_SIZE];
     static double[] refHigh = new double[MAX_ARRAY_SIZE];

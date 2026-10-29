@@ -202,7 +202,8 @@ public partial class Core
       outReal[0] = prevMA;
       outIdx = 1;
       while( today <= endIdx ) {
-         prevMA = Math.FusedMultiplyAdd(emaBeta, prevMA, optInK_1 * inReal[today++]);
+         prevMA = Math.FusedMultiplyAdd(emaBeta, prevMA, optInK_1 * inReal[today]);
+         today += 1;
          outReal[outIdx++] = prevMA;
       }
       outNBElement = outIdx;
@@ -278,7 +279,8 @@ public partial class Core
       outReal[0] = prevMA;
       outIdx = 1;
       while( today <= endIdx ) {
-         prevMA = Math.FusedMultiplyAdd(emaBeta, prevMA, optInK_1 * (double)inReal[today++]);
+         prevMA = Math.FusedMultiplyAdd(emaBeta, prevMA, optInK_1 * (double)inReal[today]);
+         today += 1;
          outReal[outIdx++] = prevMA;
       }
       outNBElement = outIdx;
@@ -712,7 +714,8 @@ public partial class Core
       outReal[0 * outStride] = prevMA;
       outIdx = 1;
       while( today <= endIdx ) {
-         prevMA = Math.FusedMultiplyAdd(emaBeta, prevMA, optInK_1 * inReal[today++]);
+         prevMA = Math.FusedMultiplyAdd(emaBeta, prevMA, optInK_1 * inReal[today]);
+         today += 1;
          outReal[outIdx++ * outStride] = prevMA;
       }
       outNBElement = outIdx;
